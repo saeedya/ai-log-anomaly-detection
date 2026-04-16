@@ -2,7 +2,7 @@
 
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 ![Python](https://img.shields.io/badge/python-3.10-blue)
-![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yaml/badge.svg)
 
 ---
 

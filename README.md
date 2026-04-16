@@ -2,6 +2,7 @@
 
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 ![Python](https://img.shields.io/badge/python-3.10-blue)
+![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yml/badge.svg)
 
 ---
 
@@ -33,8 +34,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – In Progress – Core API, preprocessing, model integration, Dockerization, and dependency security hardening completed.  
-Next phase: CI/CD and deployment workflow.
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, and CI automation completed.  
+Next phase: CD workflow and Kubernetes integration.
 
 ---
 
@@ -46,6 +47,7 @@ Next phase: CI/CD and deployment workflow.
 - Continuous documentation updates
 - Separate production and development dependencies
 - Linting and security checks for code quality assurance
+- Automated CI checks for testing, linting, and security scanning
 
 ---
 
@@ -69,6 +71,7 @@ Next phase: CI/CD and deployment workflow.
 * Docker support for containerization
 * Prepared for future Kubernetes deployment
 * Dockerized application for portable execution
+* GitHub Actions CI for automated quality and security checks
 
 ---
 
@@ -85,6 +88,7 @@ Next phase: CI/CD and deployment workflow.
 * pip-audit
 * Ruff
 * Makefile
+* GitHub Actions
 
 ---
 
@@ -284,8 +288,9 @@ ruff check .
 
 ## Upcoming Features
 - Extended log preprocessing and feature engineering pipeline
+- CD workflow for automated deployment
 - Kubernetes deployment
-- CI/CD pipeline with automated testing and security checks
+
 
 ---
 

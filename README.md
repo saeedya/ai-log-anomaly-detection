@@ -44,6 +44,7 @@ Next phase: improved testing, CI/CD, and deployment workflow.
 - Incremental implementation (API → ML → Deployment)
 - Unit, API, and security testing at each phase
 - Continuous documentation updates
+- Separate production and development dependencies
 
 ---
 
@@ -101,15 +102,16 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 
 ```
 ai-log-anomaly-detection/
-├── app/            # FastAPI application
+├── app/                    # FastAPI application
 │   ├── main.py
 │   ├── schemas.py
 │   └── services/
-├── ml/             # ML training and prediction logic
-├── tests/          # Unit, API, and security tests
-├── docs/           # Project documentation
-├── models/         # Saved ML models
-├── requirements.txt
+├── ml/                     # ML training and prediction logic
+├── tests/                  # Unit, API, and security tests
+├── docs/                   # Project documentation
+├── models/                 # Saved ML models
+├── requirements.txt        # Production dependencies
+├── requirements-dev.txt    # Development & testing dependencies
 ├── Dockerfile
 └── README.md
 ```
@@ -144,9 +146,14 @@ source venv/bin/activate
 ---
 
 ### 3. Install dependencies
-
+#### Production
 ```bash
 pip install -r requirements.txt
+```
+
+#### Development & testing
+```bash
+pip install -r requirements-dev.txt
 ```
 
 ---
@@ -178,6 +185,10 @@ uvicorn app.main:app --reload
 ### Build the image
 ```bash
 docker build -t ai-log-anomaly-detection:latest .
+```
+
+### Run the container
+```bash
 docker run --rm -p 8000:8000 ai-log-anomaly-detection:latest
 ```
 

@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 FEATURE_COLUMNS = ["response_time", "status_code", "request_count"]
 
 

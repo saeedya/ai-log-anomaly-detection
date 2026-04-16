@@ -33,8 +33,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API, input validation, preprocessing, model training, prediction integration, and Dockerization completed.  
-Next phase: improved testing, CI/CD, and deployment workflow.
+🚧 In Progress – Initial API, input validation, preprocessing, model training, prediction integration, Dockerization, and test/security hardening completed.  
+Next phase: CI/CD and deployment workflow.
 
 ---
 
@@ -45,6 +45,7 @@ Next phase: improved testing, CI/CD, and deployment workflow.
 - Unit, API, and security testing at each phase
 - Continuous documentation updates
 - Separate production and development dependencies
+- Linting and security checks for code quality assurance
 
 ---
 
@@ -82,6 +83,8 @@ Next phase: improved testing, CI/CD, and deployment workflow.
 * Pytest
 * Bandit
 * pip-audit
+* Ruff
+* Makefile
 
 ---
 
@@ -229,17 +232,27 @@ Runs anomaly detection on structured log features using the trained ML model.
 ---
 
 ## Running Tests
+### Run all tests
 
 ```bash
 pytest
 ```
 
-### With coverage
+### Run tests with coverage
+```bash
+pytest --cov=app --cov=ml
+```
+
+### Run tests with coverage
 
 ```bash
 pytest --cov=app --cov=ml
 ```
 
+### Run lint checks
+```bash
+ruff check .
+```
 ---
 
 ## Security Checks
@@ -253,7 +266,14 @@ bandit -r app ml
 ### Dependency vulnerabilities
 
 ```bash
-pip-audit
+pip-audit -r requirements.txt
+pip-audit -r requirements-dev.txt
+```
+
+### Linting
+
+```bash
+ruff check .
 ```
 
 ---

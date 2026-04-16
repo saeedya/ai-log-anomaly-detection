@@ -35,4 +35,5 @@ def test_predict_endpoint_returns_prediction():
     body = response.json()
     assert "prediction" in body
     assert "label" in body
+    assert isinstance(body["prediction"], int)
     assert body["label"] in ["normal", "anomaly"]

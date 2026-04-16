@@ -33,8 +33,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API, input validation, preprocessing, and model training completed.  
-Next phase: ML prediction integration with the FastAPI endpoint.
+🚧 In Progress – Initial API, input validation, preprocessing, model training, and prediction integration completed.  
+Next phase: Dockerization, improved testing, and deployment workflow.
 
 ---
 
@@ -60,7 +60,7 @@ Next phase: ML prediction integration with the FastAPI endpoint.
 
 * Input preprocessing for structured log features
 * Feature preparation for anomaly detection input
-* Anomaly detection using machine learning (planned)
+* Anomaly detection using machine learning
 * REST API built with FastAPI
 * Input validation using Pydantic
 * Unit, API, and security testing
@@ -183,7 +183,7 @@ Returns basic project info
 Returns API health status
 
 ### POST /predict
-Placeholder endpoint for validating log feature input. ML prediction will be added in the next phase.
+Runs anomaly detection on structured log features using the trained ML model.
 
 #### Example Request
 
@@ -238,7 +238,6 @@ pip-audit
 
 ## Upcoming Features
 - Extended log preprocessing and feature engineering pipeline
-- Integration of ML model with FastAPI
 - Docker containerization
 - Kubernetes deployment
 - CI/CD pipeline with automated testing and security checks

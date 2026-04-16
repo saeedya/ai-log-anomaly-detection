@@ -33,7 +33,7 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API, input validation, preprocessing, model training, prediction integration, Dockerization, and test/security hardening completed.  
+🚧 In Progress – In Progress – Core API, preprocessing, model integration, Dockerization, and dependency security hardening completed.  
 Next phase: CI/CD and deployment workflow.
 
 ---

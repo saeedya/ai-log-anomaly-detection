@@ -125,33 +125,53 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 
 ```
 ai-log-anomaly-detection/
-├── app/                    # FastAPI application
-│   ├── config.py           # Environment-based runtime settings
-│   ├── logging_config.py   # Logging setup
+├── app/                      # FastAPI application
+│   ├── config.py             # Environment-based runtime settings
+│   ├── logging_config.py     # Logging setup
 │   ├── main.py
+│   ├── metrics.py
+│   ├── middleware.py
 │   ├── schemas.py
-│   └── services/
-├── .env.example            # Example environment variables
-├── ml/                       # ML training and prediction logic
+│   └── services/             # Business logic (ML, preprocessing, etc.)
+│
+├── ml/                       # Model training & offline ML logic
+│   ├── train.py
+│   ├── predict.py
+│
 ├── tests/                    # Unit, API, and security tests
-├── docs/                     # Project documentation
+│   ├── api/
+│   ├── unit/
+│   └── security/
+│
+├── models/                   # Trained ML models (ignored in git if needed)
+│
+├── docs/                     # Documentation & screenshots
+│   ├── swagger.png
+│   └── metrics.png
+│
 ├── helm/                     # Helm chart for Kubernetes deployment
 │   └── ai-log-anomaly-detection/
 │       ├── Chart.yaml
 │       ├── values.yaml
 │       └── templates/
+│
 ├── k8s/                      # Kubernetes manifests
 │   ├── deployment.yaml
 │   ├── service.yaml
 │   └── namespace.yaml
-├── models/                   # Saved ML models
+│
+├── .env.example                # Example environment variables
+├── .gitignore
+├── .dockerignore
+│
 ├── requirements.txt          # Production dependencies
 ├── requirements-dev.txt      # Development & testing dependencies
+│
 ├── pytest.ini                # Pytest configuration
 ├── ruff.toml                 # Linting configuration
-├── Dockerfile
-├── .dockerignore
 ├── Makefile                  # Development commands (optional)
+│
+├── Dockerfile
 └── README.md
 ```
 

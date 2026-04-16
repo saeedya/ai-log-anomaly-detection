@@ -34,7 +34,7 @@ This project focuses on bridging the gap between machine learning models and pro
 ## Project Status
 
 🚧 In Progress – Initial API and project structure completed.  
-Next phase: ML model integration and prediction endpoint.
+Next phase: Next phase: ML model integration for anomaly prediction.
 
 ---
 
@@ -180,8 +180,8 @@ Returns basic project info
 
 Returns API health status
 
-### POST /predict (Planned)
-Endpoint for detecting anomalies from log features. This will be implemented in the next phase.
+### POST /predict
+Placeholder endpoint for validating log feature input. ML prediction will be added in the next phase.
 
 #### Example Request
 

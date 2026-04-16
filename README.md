@@ -10,23 +10,26 @@
 
 ## Table of Contents
 
-- Overview
-- Project Status
-- Development Workflow
-- Security Considerations
-- Features
-- Tech Stack
-- Architecture
-- Project Structure
-- Configuration
-- Getting Started
-- Kubernetes Deployment
-- Helm Deployment
-- API Endpoints
-- Observability
-- Running Tests
-- Security Checks
-- Upcoming Features
+- [Overview](#overview)
+- [Project Status](#project-status)
+- [Development Workflow](#development-workflow)
+- [Security Considerations](#security-considerations)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Getting Started](#getting-started)
+- [Kubernetes Deployment](#kubernetes-deployment)
+- [Helm Deployment](#helm-deployment)
+- [API Endpoints](#api-endpoints)
+- [Observability](#observability)
+- [Running Tests](#running-tests)
+- [Security Checks](#security-checks)
+- [Upcoming Features](#upcoming-features)
+- [License](#license)
+- [Author](#author)
+- [Screenshots](#screenshots)
 
 ## Overview
 

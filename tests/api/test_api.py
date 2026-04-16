@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
+from ml.train import train_model
 
 client = TestClient(app)
 
@@ -17,7 +18,9 @@ def test_health_endpoint():
     assert response.json() == {"status": "ok"}
 
 
-def test_predict_endpoint_returns_prediction_or_server_error():
+def test_predict_endpoint_returns_prediction():
+    train_model()
+
     response = client.post(
         "/predict",
         json={
@@ -27,10 +30,9 @@ def test_predict_endpoint_returns_prediction_or_server_error():
         },
     )
 
-    assert response.status_code in [200, 500]
+    assert response.status_code == 200
 
-    if response.status_code == 200:
-        body = response.json()
-        assert "prediction" in body
-        assert "label" in body
-        assert body["label"] in ["normal", "anomaly"]
+    body = response.json()
+    assert "prediction" in body
+    assert "label" in body
+    assert body["label"] in ["normal", "anomaly"]

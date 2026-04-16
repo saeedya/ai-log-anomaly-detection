@@ -23,6 +23,12 @@ def test_health_endpoint():
     assert "model_loaded" in body
 
 
+def test_metrics_endpoint():
+    response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "app_requests_total" in response.text
+
+
 def test_predict_endpoint_returns_prediction():
     train_model()
 

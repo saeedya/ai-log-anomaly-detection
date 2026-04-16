@@ -1,3 +1,5 @@
+![License](https://img.shields.io/badge/license-educational-blue)
+
 # AI-based Log Anomaly Detection System
 
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
@@ -16,12 +18,15 @@
 - Tech Stack
 - Architecture
 - Project Structure
+- Configuration
 - Getting Started
+- Kubernetes Deployment
+- Helm Deployment
 - API Endpoints
+- Observability
 - Running Tests
 - Security Checks
 - Upcoming Features
-- Environment-based configuration
 
 ## Overview
 
@@ -35,8 +40,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, and production hardening completed.  
-Next phase: observability improvements and deployment refinement.
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, and observability integration completed.  
+Next phase: deployment refinement and production-grade monitoring enhancements.
 
 ---
 
@@ -70,14 +75,14 @@ Next phase: observability improvements and deployment refinement.
 * Input validation using Pydantic
 * Unit, API, and security testing
 * Docker support for containerization
-* Prepared for future Kubernetes deployment
+* Production-ready Kubernetes deployment with manifests and Helm chart
 * Dockerized application for portable execution
 * GitHub Actions CI for automated quality and security checks
-* Kubernetes manifests for container orchestration and deployment
-* Helm chart for configurable Kubernetes deployment
 * Environment-based configuration for runtime settings
 * Structured application logging
 * Non-root Docker container for improved container security
+* Prometheus-compatible metrics endpoint
+* Request and prediction observability
 
 ---
 
@@ -96,6 +101,7 @@ Next phase: observability improvements and deployment refinement.
 * Makefile
 * GitHub Actions
 * Helm
+* Prometheus client
 
 ---
 
@@ -158,8 +164,8 @@ export APP_NAME="AI Log Anomaly Detection API"
 export MODEL_PATH="models/isolation_forest.pkl"
 export LOG_LEVEL="INFO"
 
-Note: You can also copy .env.example and adapt the values for your environment.
 ```
+Note: You can also copy `.env.example` and adapt the values for your environment.
 
 ---
 
@@ -308,6 +314,10 @@ Returns API health status
 ### POST /predict
 Runs anomaly detection on structured log features using the trained ML model.
 
+### GET /metrics
+
+Exposes Prometheus-compatible application metrics for observability and monitoring.
+
 #### Example Request
 
 ```json
@@ -329,6 +339,22 @@ Runs anomaly detection on structured log features using the trained ML model.
 
 ---
 
+## Observability
+
+The application exposes Prometheus-compatible metrics at:
+
+```bash
+GET /metrics
+```
+
+### Available metrics
+
+* app_requests_total
+* app_request_duration_seconds
+* model_predictions_total
+
+---
+
 ## Running Tests
 ### Run all tests
 
@@ -337,12 +363,6 @@ pytest
 ```
 
 ### Run tests with coverage
-```bash
-pytest --cov=app --cov=ml
-```
-
-### Run tests with coverage
-
 ```bash
 pytest --cov=app --cov=ml
 ```
@@ -377,11 +397,9 @@ ruff check .
 ---
 
 ## Upcoming Features
-- Extended log preprocessing and feature engineering pipeline
 - Image registry integration
-- Environment-based configuration
-- Observability improvements
-- Metrics and monitoring integration
+- Grafana dashboard integration
+- Alerting rules for anomaly prediction metrics
 - Production-grade deployment refinements
 
 ---
@@ -395,3 +413,13 @@ This project is for educational and demonstration purposes.
 ## Author
 
 Saeed Yasrebi
+
+---
+
+## Screenshots
+
+### API Documentation (Swagger UI)
+![Swagger UI](docs/swagger.png)
+
+### Metrics Endpoint
+![Metrics](docs/metrics.png)

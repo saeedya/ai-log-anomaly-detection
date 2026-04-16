@@ -33,8 +33,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API and project structure completed.  
-Next phase: Next phase: ML model integration for anomaly prediction.
+🚧 In Progress – Initial API, input validation, and preprocessing components completed.  
+Next phase: ML model training and prediction integration.
 
 ---
 
@@ -58,8 +58,8 @@ Next phase: Next phase: ML model integration for anomaly prediction.
 
 ## Features
 
-* Log ingestion and preprocessing
-* Feature extraction from structured log data
+* Input preprocessing for structured log features
+* Feature preparation for anomaly detection input
 * Anomaly detection using machine learning (planned)
 * REST API built with FastAPI
 * Input validation using Pydantic
@@ -236,7 +236,7 @@ pip-audit
 
 ## Upcoming Features
 - ML model training using Isolation Forest
-- Log preprocessing and feature engineering pipeline
+- Extended log preprocessing and feature engineering pipeline
 - Integration of ML model with FastAPI
 - Docker containerization
 - Kubernetes deployment

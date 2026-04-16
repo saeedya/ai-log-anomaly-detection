@@ -3,14 +3,16 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
-MODEL_PATH = Path("models/isolation_forest.pkl")
+from app.config import settings
 
 
 def load_model():
-    if not MODEL_PATH.exists():
+    model_path = Path(settings.model_path)
+
+    if not model_path.exists():
         return None
 
-    return joblib.load(MODEL_PATH)
+    return joblib.load(model_path)
 
 
 def predict_anomaly(model, features: pd.DataFrame) -> int:

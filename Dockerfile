@@ -5,16 +5,19 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-COPY requirements.txt .
+RUN useradd -m -u 10001 appuser
 
+COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p models
+RUN mkdir -p models \
+    && python ml/train.py \
+    && chown -R appuser:appuser /app
 
-RUN python ml/train.py
+USER appuser
 
 EXPOSE 8000
 

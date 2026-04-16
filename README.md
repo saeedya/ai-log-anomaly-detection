@@ -21,6 +21,7 @@
 - Running Tests
 - Security Checks
 - Upcoming Features
+- Environment-based configuration
 
 ## Overview
 
@@ -34,8 +35,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, and Helm chart support completed.  
-Next phase: production-ready deployment refinements and platform improvements.
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, and production hardening completed.  
+Next phase: observability improvements and deployment refinement.
 
 ---
 
@@ -74,6 +75,9 @@ Next phase: production-ready deployment refinements and platform improvements.
 * GitHub Actions CI for automated quality and security checks
 * Kubernetes manifests for container orchestration and deployment
 * Helm chart for configurable Kubernetes deployment
+* Environment-based configuration for runtime settings
+* Structured application logging
+* Non-root Docker container for improved container security
 
 ---
 
@@ -113,9 +117,12 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 ```
 ai-log-anomaly-detection/
 ├── app/                    # FastAPI application
+│   ├── config.py           # Environment-based runtime settings
+│   ├── logging_config.py   # Logging setup
 │   ├── main.py
 │   ├── schemas.py
 │   └── services/
+├── .env.example            # Example environment variables
 ├── ml/                       # ML training and prediction logic
 ├── tests/                    # Unit, API, and security tests
 ├── docs/                     # Project documentation
@@ -137,6 +144,21 @@ ai-log-anomaly-detection/
 ├── .dockerignore
 ├── Makefile                  # Development commands (optional)
 └── README.md
+```
+
+---
+
+## Configuration
+
+The application supports basic runtime configuration through environment variables.
+
+### Example
+```bash
+export APP_NAME="AI Log Anomaly Detection API"
+export MODEL_PATH="models/isolation_forest.pkl"
+export LOG_LEVEL="INFO"
+
+Note: You can also copy .env.example and adapt the values for your environment.
 ```
 
 ---
@@ -359,7 +381,8 @@ ruff check .
 - Image registry integration
 - Environment-based configuration
 - Observability improvements
-
+- Metrics and monitoring integration
+- Production-grade deployment refinements
 
 ---
 

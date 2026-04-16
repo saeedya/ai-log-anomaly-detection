@@ -1,26 +1,40 @@
+import logging
+
 from fastapi import FastAPI, HTTPException
 
+from app.config import settings
+from app.logging_config import configure_logging
 from app.schemas import LogFeatures
 from app.services.model_service import load_model, predict_anomaly
 from app.services.preprocess import prepare_input_data
 
-app = FastAPI(title="AI Log Anomaly Detection API")
+configure_logging()
+logger = logging.getLogger(__name__)
+
+app = FastAPI(title=settings.app_name)
 
 
 @app.get("/")
 def root() -> dict[str, str]:
-    return {"message": "AI Log Anomaly Detection API"}
+    return {"message": settings.app_name}
 
 
 @app.get("/health")
-def health() -> dict[str, str]:
-    return {"status": "ok"}
+def health() -> dict[str, str | bool]:
+    model_loaded = load_model() is not None
+    return {
+        "status": "ok",
+        "model_loaded": model_loaded,
+    }
 
 
 @app.post("/predict")
 def predict(payload: LogFeatures) -> dict[str, int | str]:
+    logger.info("Received prediction request")
+
     model = load_model()
     if model is None:
+        logger.error("Model not found at configured path")
         raise HTTPException(
             status_code=500,
             detail="Model not found. Please train the model first.",
@@ -34,6 +48,8 @@ def predict(payload: LogFeatures) -> dict[str, int | str]:
 
     prediction = predict_anomaly(model, features)
     label = "anomaly" if prediction == -1 else "normal"
+
+    logger.info("Prediction completed successfully")
 
     return {
         "prediction": prediction,

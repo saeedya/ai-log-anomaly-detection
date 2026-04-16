@@ -115,7 +115,11 @@ ai-log-anomaly-detection/
 ├── models/                 # Saved ML models
 ├── requirements.txt        # Production dependencies
 ├── requirements-dev.txt    # Development & testing dependencies
+├── pytest.ini              # Pytest configuration
+├── ruff.toml                # Linting configuration
 ├── Dockerfile
+├── .dockerignore
+├── Makefile                 # Development commands (optional)
 └── README.md
 ```
 

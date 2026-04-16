@@ -33,8 +33,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API, input validation, preprocessing, model training, and prediction integration completed.  
-Next phase: Dockerization, improved testing, and deployment workflow.
+🚧 In Progress – Initial API, input validation, preprocessing, model training, prediction integration, and Dockerization completed.  
+Next phase: improved testing, CI/CD, and deployment workflow.
 
 ---
 
@@ -66,6 +66,7 @@ Next phase: Dockerization, improved testing, and deployment workflow.
 * Unit, API, and security testing
 * Docker support for containerization
 * Prepared for future Kubernetes deployment
+* Dockerized application for portable execution
 
 ---
 
@@ -172,6 +173,16 @@ uvicorn app.main:app --reload
 
 ---
 
+## Run with Docker
+
+### Build the image
+```bash
+docker build -t ai-log-anomaly-detection:latest .
+docker run --rm -p 8000:8000 ai-log-anomaly-detection:latest
+```
+
+---
+
 ## API Endpoints
 
 ### GET /
@@ -238,7 +249,6 @@ pip-audit
 
 ## Upcoming Features
 - Extended log preprocessing and feature engineering pipeline
-- Docker containerization
 - Kubernetes deployment
 - CI/CD pipeline with automated testing and security checks
 

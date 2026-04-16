@@ -34,8 +34,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 n Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, and Kubernetes manifests completed.  
-Next phase: deployment refinement and production-ready workflow improvements.
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, and Helm chart support completed.  
+Next phase: production-ready deployment refinements and platform improvements.
 
 ---
 
@@ -73,6 +73,7 @@ Next phase: deployment refinement and production-ready workflow improvements.
 * Dockerized application for portable execution
 * GitHub Actions CI for automated quality and security checks
 * Kubernetes manifests for container orchestration and deployment
+* Helm chart for configurable Kubernetes deployment
 
 ---
 
@@ -90,6 +91,7 @@ Next phase: deployment refinement and production-ready workflow improvements.
 * Ruff
 * Makefile
 * GitHub Actions
+* Helm
 
 ---
 
@@ -117,6 +119,11 @@ ai-log-anomaly-detection/
 ├── ml/                       # ML training and prediction logic
 ├── tests/                    # Unit, API, and security tests
 ├── docs/                     # Project documentation
+├── helm/                     # Helm chart for Kubernetes deployment
+│   └── ai-log-anomaly-detection/
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       └── templates/
 ├── k8s/                      # Kubernetes manifests
 │   ├── deployment.yaml
 │   ├── service.yaml
@@ -237,6 +244,35 @@ http://127.0.0.1:8000/docs
 
 ---
 
+## Helm Deployment
+
+### Lint the chart
+```bash
+helm lint helm/ai-log-anomaly-detection
+```
+
+### Render Kubernetes manifests
+```bash
+helm template ai-log-anomaly-detection helm/ai-log-anomaly-detection
+```
+
+### Install the chart
+```bash
+helm install ai-log-anomaly-detection helm/ai-log-anomaly-detection
+```
+
+### Upgrade the release
+```bash
+helm upgrade ai-log-anomaly-detection helm/ai-log-anomaly-detection
+```
+
+### Uninstall the release
+```bash
+helm uninstall ai-log-anomaly-detection -n ai-log-anomaly
+```
+
+---
+
 ## API Endpoints
 
 ### GET /
@@ -321,7 +357,8 @@ ruff check .
 ## Upcoming Features
 - Extended log preprocessing and feature engineering pipeline
 - Image registry integration
-- Helm chart support
+- Environment-based configuration
+- Observability improvements
 
 
 ---

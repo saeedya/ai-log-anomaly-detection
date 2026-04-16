@@ -33,8 +33,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Initial API, input validation, and preprocessing components completed.  
-Next phase: ML model training and prediction integration.
+🚧 In Progress – Initial API, input validation, preprocessing, and model training completed.  
+Next phase: ML prediction integration with the FastAPI endpoint.
 
 ---
 
@@ -150,8 +150,10 @@ pip install -r requirements.txt
 
 ---
 
-### 4. Train the model (Planned)
-Model training functionality will be implemented in the next phase.
+### 4. Train the model
+```bash
+python ml/train.py
+```
 
 ---
 
@@ -235,7 +237,6 @@ pip-audit
 ---
 
 ## Upcoming Features
-- ML model training using Isolation Forest
 - Extended log preprocessing and feature engineering pipeline
 - Integration of ML model with FastAPI
 - Docker containerization

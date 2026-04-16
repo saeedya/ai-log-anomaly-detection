@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-log-anomaly-detection
+  namespace: ai-log-anomaly
+  labels:
+    app: ai-log-anomaly-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-log-anomaly-detection
+  template:
+    metadata:
+      labels:
+        app: ai-log-anomaly-detection
+    spec:
+      containers:
+        - name: ai-log-anomaly-detection
+          image: ai-log-anomaly-detection:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

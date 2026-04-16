@@ -34,8 +34,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, and CI automation completed.  
-Next phase: CD workflow and Kubernetes integration.
+🚧 n Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, and Kubernetes manifests completed.  
+Next phase: deployment refinement and production-ready workflow improvements.
 
 ---
 
@@ -72,6 +72,7 @@ Next phase: CD workflow and Kubernetes integration.
 * Prepared for future Kubernetes deployment
 * Dockerized application for portable execution
 * GitHub Actions CI for automated quality and security checks
+* Kubernetes manifests for container orchestration and deployment
 
 ---
 
@@ -82,7 +83,7 @@ Next phase: CD workflow and Kubernetes integration.
 * Pandas
 * Scikit-learn
 * Docker
-* Kubernetes (planned)
+* Kubernetes
 * Pytest
 * Bandit
 * pip-audit
@@ -113,17 +114,21 @@ ai-log-anomaly-detection/
 │   ├── main.py
 │   ├── schemas.py
 │   └── services/
-├── ml/                     # ML training and prediction logic
-├── tests/                  # Unit, API, and security tests
-├── docs/                   # Project documentation
-├── models/                 # Saved ML models
-├── requirements.txt        # Production dependencies
-├── requirements-dev.txt    # Development & testing dependencies
-├── pytest.ini              # Pytest configuration
-├── ruff.toml                # Linting configuration
+├── ml/                       # ML training and prediction logic
+├── tests/                    # Unit, API, and security tests
+├── docs/                     # Project documentation
+├── k8s/                      # Kubernetes manifests
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   └── namespace.yaml
+├── models/                   # Saved ML models
+├── requirements.txt          # Production dependencies
+├── requirements-dev.txt      # Development & testing dependencies
+├── pytest.ini                # Pytest configuration
+├── ruff.toml                 # Linting configuration
 ├── Dockerfile
 ├── .dockerignore
-├── Makefile                 # Development commands (optional)
+├── Makefile                  # Development commands (optional)
 └── README.md
 ```
 
@@ -201,6 +206,33 @@ docker build -t ai-log-anomaly-detection:latest .
 ### Run the container
 ```bash
 docker run --rm -p 8000:8000 ai-log-anomaly-detection:latest
+```
+
+---
+
+## Kubernetes Deployment
+
+### Apply Kubernetes manifests
+```bash
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+### Verify resources
+```bash
+kubectl get all -n ai-log-anomaly
+```
+
+### Port-forward the service
+```bash
+kubectl port-forward svc/ai-log-anomaly-detection 8000:80 -n ai-log-anomaly
+```
+
+### Access the application
+```bash
+http://127.0.0.1:8000
+http://127.0.0.1:8000/docs
 ```
 
 ---
@@ -288,8 +320,8 @@ ruff check .
 
 ## Upcoming Features
 - Extended log preprocessing and feature engineering pipeline
-- CD workflow for automated deployment
-- Kubernetes deployment
+- Image registry integration
+- Helm chart support
 
 
 ---

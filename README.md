@@ -418,8 +418,10 @@ Saeed Yasrebi
 
 ## Screenshots
 
-### API Documentation (Swagger UI)
-![Swagger UI](docs/swagger.png)
-
-### Metrics Endpoint
-![Metrics](docs/metrics.png)
+<p align="center">
+  <img src="docs/swagger.png" width="100"/>
+  <img src="docs/metrics.png" width="100"/>
+</p>
+<p align="center">
+  <em>Swagger UI & Prometheus Metrics</em>
+</p>

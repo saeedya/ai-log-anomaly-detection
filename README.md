@@ -60,6 +60,10 @@
       - [Example Response](#example-response)
   - [Observability](#observability)
     - [Available metrics](#available-metrics)
+  - [Monitoring Setup](#monitoring-setup)
+    - [Prometheus](#prometheus)
+    - [Run Prometheus with the sample config](#run-prometheus-with-the-sample-config)
+    - [Grafana](#grafana)
   - [Running Tests](#running-tests)
     - [Run all tests](#run-all-tests)
     - [Run tests with coverage](#run-tests-with-coverage)
@@ -86,7 +90,7 @@ This project focuses on bridging the gap between machine learning models and pro
 ## Project Status
 
 🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, and CD image publishing completed.  
-Next phase: deployment refinement and production-grade monitoring enhancements.
+Next phase: production-grade deployment refinements and registry-aware release management.
 
 ---
 
@@ -129,6 +133,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Prometheus-compatible metrics endpoint
 * Request and prediction observability
 * Automated CD workflow for container build and registry publishing
+* Prometheus scraping configuration and Grafana dashboard guidance
 
 ---
 
@@ -149,6 +154,8 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Helm
 * Prometheus client
 * GitHub Container Registry (GHCR)
+* Prometheus
+* Grafana
 
 ---
 
@@ -188,6 +195,10 @@ ai-log-anomaly-detection/
 │   └── security/
 │
 ├── models/                   # Trained ML models (ignored in git if needed)
+│
+├──monitoring/                # Prometheus and Grafana integration files
+   ├── prometheus.yaml
+   └── grafana-dashboard-notes.md
 │
 ├── docs/                     # Documentation & screenshots
 │   ├── swagger.png
@@ -418,11 +429,44 @@ The application exposes Prometheus-compatible metrics at:
 GET /metrics
 ```
 
+These metrics can be scraped by Prometheus and visualized in Grafana dashboards.
+
 ### Available metrics
 
 * app_requests_total
 * app_request_duration_seconds
 * model_predictions_total
+
+---
+## Monitoring Setup
+
+### Prometheus
+
+A sample Prometheus configuration is available in:
+
+```text
+monitoring/prometheus.yaml
+```
+
+It is configured to scrape the application's /metrics endpoint
+
+### Run Prometheus with the sample config
+```bash
+prometheus --config.file=monitoring/prometheus.yaml
+```
+
+### Grafana
+
+Suggested dashboard ideas are documented in:
+
+monitoring/grafana-dashboard-notes.md
+
+These notes describe recommended panels for:
+
+- request volume
+- request latency
+- prediction counts
+- health monitoring
 
 ---
 
@@ -468,8 +512,9 @@ ruff check .
 ---
 
 ## Upcoming Features
+- Registry-aware image versioning
 - Automated Kubernetes deployment
-- Grafana dashboard integration
+- Custom Grafana dashboard JSON export
 - Alerting rules for anomaly prediction metrics
 - Production-grade deployment refinements
 

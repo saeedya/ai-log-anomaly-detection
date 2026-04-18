@@ -6,7 +6,7 @@ from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
 from app.config import settings
 from app.logging_config import configure_logging
-from app.metrics import PREDICTION_COUNT
+from app.metrics import ERROR_COUNT, PREDICTION_COUNT
 from app.middleware import MetricsMiddleware
 from app.schemas import LogFeatures
 from app.services.model_service import load_model, predict_anomaly
@@ -45,6 +45,7 @@ def predict(payload: LogFeatures) -> dict[str, int | str]:
     model = load_model()
     if model is None:
         logger.error("Model not found at configured path")
+        ERROR_COUNT.labels(endpoint="/predict").inc()
         raise HTTPException(
             status_code=500,
             detail="Model not found. Please train the model first.",

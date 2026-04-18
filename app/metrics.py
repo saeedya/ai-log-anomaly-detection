@@ -17,3 +17,9 @@ REQUEST_LATENCY = Histogram(
     "Request latency in seconds",
     ["method", "endpoint"],
 )
+
+ERROR_COUNT = Counter(
+    "app_errors_total",
+    "Total number of application errors",
+    ["endpoint"],
+)

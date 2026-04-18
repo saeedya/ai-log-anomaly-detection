@@ -14,6 +14,7 @@
 - [AI-based Log Anomaly Detection System](#ai-based-log-anomaly-detection-system)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [Why This Project Matters](#why-this-project-matters)
   - [Project Status](#project-status)
   - [Development Workflow](#development-workflow)
   - [Security Considerations](#security-considerations)
@@ -85,6 +86,19 @@ This project is an end-to-end AI and MLOps system designed to detect anomalies i
 It simulates a real-world production scenario where logs are collected, processed, analyzed, and served through an API.
 
 This project focuses on bridging the gap between machine learning models and production systems through a practical MLOps approach.
+
+---
+
+## Why This Project Matters
+
+This project demonstrates a production-minded MLOps workflow by combining:
+
+- machine learning-based anomaly detection
+- API serving with FastAPI
+- observability with Prometheus-compatible metrics
+- containerization with Docker
+- Kubernetes and Helm deployment artifacts
+- CI/CD automation with GitHub Actions and release workflows
 
 ---
 
@@ -173,11 +187,33 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 - A machine learning model detects anomalies
 - Results are served via a REST API
 
+```mermaid
+flowchart LR
+    A[Log Input] --> B[Preprocessing]
+    B --> C[Feature Engineering]
+    C --> D[Isolation Forest Model]
+    D --> E[FastAPI API]
+    E --> F[Client]
+
+    E --> G[Health Endpoint]
+    E --> H[Metrics Endpoint]
+    H --> I[Prometheus]
+    I --> J[Grafana]
+
+    E --> K[Docker]
+    K --> L[Kubernetes]
+    L --> M[Helm]
+
+    N[GitHub Actions CI] --> E
+    O[GitHub Actions CD] --> K
+    P[Release Please] --> O
+```
+
 ---
 
 ## Project Structure
 
-```
+```text
 ai-log-anomaly-detection/
 ├── app/                      # FastAPI application
 │   ├── config.py             # Environment-based runtime settings
@@ -199,11 +235,12 @@ ai-log-anomaly-detection/
 │
 ├── models/                   # Trained ML models (ignored in git if needed)
 │
-├──monitoring/                # Prometheus and Grafana integration files
-   ├── prometheus.yaml
-   └── grafana-dashboard-notes.md
+├── monitoring/               # Prometheus and Grafana integration files
+│   ├── prometheus.yaml
+│   └── grafana-dashboard-notes.md
 │
 ├── docs/                     # Documentation & screenshots
+│   ├── architecture.md
 │   ├── swagger.png
 │   └── metrics.png
 │

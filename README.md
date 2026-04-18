@@ -174,6 +174,7 @@ Next phase: alerting integration and production-grade deployment refinements.
 * Configurable traffic generator for simulating real-time prediction workloads
 * Docker Compose-based traffic generation for fully automated local demos
 * Auto-provisioned Grafana datasource and dashboard setup
+* Real-time anomaly alerting using Prometheus and Alertmanager
 
 ---
 

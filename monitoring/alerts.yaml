@@ -1,0 +1,11 @@
+groups:
+  - name: anomaly-alerts
+    rules:
+      - alert: HighAnomalyRate
+        expr: rate(model_predictions_total{label="anomaly"}[1m]) > 0.5
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High anomaly rate detected"
+          description: "Anomaly prediction rate is unusually high"

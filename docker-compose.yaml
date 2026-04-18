@@ -15,7 +15,10 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
+      - ./monitoring/alerts.yaml:/etc/prometheus/alerts.yaml:ro
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml"
     depends_on:
       - app
 
@@ -40,3 +43,9 @@ services:
       SLEEP_SECONDS: "2"
     depends_on:
       - app
+  
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: ai-log-anomaly-alertmanager
+    ports:
+      - "9093:9093"

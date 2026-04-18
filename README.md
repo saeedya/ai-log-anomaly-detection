@@ -2,7 +2,7 @@
 
 # AI-based Log Anomaly Detection System
 
-![Status](https://img.shields.io/badge/status-in--progress-yellow)
+![Status](https://img.shields.io/badge/status-production--ready-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 ![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yaml/badge.svg)
 ![CD](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/cd.yaml/badge.svg?branch=main)
@@ -14,6 +14,9 @@
 - [AI-based Log Anomaly Detection System](#ai-based-log-anomaly-detection-system)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [Quick Demo](#quick-demo)
+    - [Access services](#access-services)
+    - [Default Grafana credentials:](#default-grafana-credentials)
   - [Why This Project Matters](#why-this-project-matters)
   - [Project Status](#project-status)
   - [Development Workflow](#development-workflow)
@@ -59,14 +62,9 @@
     - [GET /health](#get-health)
     - [POST /predict](#post-predict)
     - [Request Body](#request-body)
-      - [Fields](#fields)
       - [Example Request](#example-request)
       - [Example Response](#example-response)
-      - [Fields](#fields-1)
-      - [Possible Responses](#possible-responses)
-      - [Example Validation Error](#example-validation-error)
       - [Notes](#notes)
-      - [Example Anomaly](#example-anomaly)
     - [GET /metrics](#get-metrics)
   - [Observability](#observability)
     - [Available metrics](#available-metrics)
@@ -74,10 +72,11 @@
     - [Prometheus](#prometheus)
     - [Run Prometheus with the sample config](#run-prometheus-with-the-sample-config)
     - [Grafana](#grafana)
+    - [Alerting](#alerting)
   - [Local Monitoring Stack](#local-monitoring-stack)
     - [Start the stack](#start-the-stack)
     - [Access the services](#access-the-services)
-    - [Default Grafana credentials](#default-grafana-credentials)
+    - [Default Grafana credentials](#default-grafana-credentials-1)
   - [Traffic Generator](#traffic-generator)
     - [Run with Docker Compose](#run-with-docker-compose)
     - [Run the traffic generator (local)](#run-the-traffic-generator-local)
@@ -107,6 +106,29 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ---
 
+## Quick Demo
+
+Run the full stack locally:
+
+```bash
+docker compose up --build
+```
+
+### Access services
+
+- API: http://127.0.0.1:8000
+- Prometheus: http://127.0.0.1:9090
+- Grafana: http://127.0.0.1:3000
+- Alertmanager: http://127.0.0.1:9093
+
+### Default Grafana credentials:
+```text
+Username: admin
+Password: admin
+```
+
+---
+
 ## Why This Project Matters
 
 This project demonstrates a production-minded MLOps workflow by combining:
@@ -123,7 +145,7 @@ This project demonstrates a production-minded MLOps workflow by combining:
 ## Project Status
 
 🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, CD image publishing, and registry-aware tagging completed.  
-Next phase: alerting integration and production-grade deployment refinements.
+Next phase: notification integrations and production-grade deployment refinements.
 
 ---
 
@@ -170,9 +192,8 @@ Next phase: alerting integration and production-grade deployment refinements.
 * Registry-aware image tagging for reproducible releases
 * Automated semantic version tagging and GitHub release generation
 * Ready-to-import Grafana dashboard for monitoring application behavior
-* Docker Compose stack for local application, Prometheus, and Grafana setup
 * Configurable traffic generator for simulating real-time prediction workloads
-* Docker Compose-based traffic generation for fully automated local demos
+* Docker Compose-based local stack with automated traffic generation
 * Auto-provisioned Grafana datasource and dashboard setup
 * Real-time anomaly alerting using Prometheus and Alertmanager
 
@@ -221,18 +242,25 @@ flowchart LR
     D --> E[FastAPI API]
     E --> F[Client]
 
-    E --> G[Health Endpoint]
-    E --> H[Metrics Endpoint]
+    %% Traffic simulation
+    R[Traffic Generator] --> E
+
+    %% Observability
+    E --> G["s4"]
+    E --> H["s5"]
     H --> I[Prometheus]
     I --> J[Grafana]
+    I --> K[Alertmanager]
 
-    E --> K[Docker]
-    K --> L[Kubernetes]
-    L --> M[Helm]
+    %% Deployment
+    E --> L[Docker Container]
+    L --> M[Kubernetes Deployment]
+    M --> N[Helm Chart]
 
-    N[GitHub Actions CI] --> E
-    O[GitHub Actions CD] --> K
-    P[Release Please] --> O
+    %% CI/CD
+    O[GitHub Actions CI] --> E
+    P[GitHub Actions CD] --> L
+    Q[Release Please] --> P
 ```
 
 ---
@@ -271,6 +299,7 @@ ai-log-anomaly-detection/
 │           │   └── dashboard.yaml
 │           └── datasources/
 │               └── datasource.yaml
+│   ├── alerts.yaml              # Prometheus alert rules
 │
 ├── scripts/                  # Utility scripts
 │   └── generate_traffic.py   # Local traffic generator
@@ -495,7 +524,6 @@ Runs anomaly detection on structured log features using the trained ML model.
   "request_count": 15
 }
 ```
-#### Fields
 
 | Field         | Type    | Description                       | Example |
 | ------------- | ------- | --------------------------------- | ------- |
@@ -524,34 +552,17 @@ curl -X POST http://127.0.0.1:8000/predict \
 }
 ```
 
-#### Fields
-
 | Field      | Type    | Description                            |
 | ---------- | ------- | -------------------------------------- |
 | prediction | integer | Model output (0 = anomaly, 1 = normal) |
 | label      | string  | Human-readable label                   |
 
-#### Possible Responses
 
 | Status Code | Description                      |
 | ----------- | -------------------------------- |
 | 200         | Prediction successful            |
 | 422         | Invalid input (validation error) |
 | 500         | Internal server error            |
-
-#### Example Validation Error
-
-```json
-{
-  "detail": [
-    {
-      "loc": ["body", "response_time"],
-      "msg": "value is not a valid integer",
-      "type": "type_error.integer"
-    }
-  ]
-}
-```
 
 #### Notes
 
@@ -560,24 +571,6 @@ curl -X POST http://127.0.0.1:8000/predict \
 - Invalid inputs will result in a 422 response.
 - This endpoint also emits Prometheus metrics:
     - model_predictions_total
-
-#### Example Anomaly
-
-```json
-```json
-{
-  "response_time": 5000,
-  "status_code": 500,
-  "request_count": 200
-}
-```
-Possible response:
-```json
-{
-  "prediction": 0,
-  "label": "anomaly"
-}
-```
 
 ### GET /metrics
 
@@ -657,6 +650,18 @@ This automatically configures:
 - the application dashboard
 
 No manual Grafana setup is required after starting the Docker Compose stack.
+
+### Alerting
+
+Prometheus alert rules are defined in:
+
+monitoring/alerts.yaml
+
+These rules detect abnormal system behavior such as high anomaly rates.
+
+Alerts are managed via Alertmanager:
+
+http://127.0.0.1:9093
 
 ---
 
@@ -778,7 +783,8 @@ ruff check .
 ---
 
 ## Future Enhancements
-- Alerting rules for anomaly detection metrics (Prometheus Alertmanager)
+
+- Alertmanager notification integrations (Slack / Email)
 - Kubernetes deployment automation (CI/CD integration)
 - Production-grade deployment improvements (scaling, health checks, security hardening)
 

@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: ai-log-anomaly-app
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: "AI Log Anomaly Detection API"
+      MODEL_PATH: "models/isolation_forest.pkl"
+      LOG_LEVEL: "INFO"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ai-log-anomaly-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ai-log-anomaly-grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus

@@ -67,6 +67,10 @@
     - [Prometheus](#prometheus)
     - [Run Prometheus with the sample config](#run-prometheus-with-the-sample-config)
     - [Grafana](#grafana)
+  - [Local Monitoring Stack](#local-monitoring-stack)
+    - [Start the stack](#start-the-stack)
+    - [Access the services](#access-the-services)
+    - [Default Grafana credentials](#default-grafana-credentials)
   - [Running Tests](#running-tests)
     - [Run all tests](#run-all-tests)
     - [Run tests with coverage](#run-tests-with-coverage)
@@ -106,7 +110,7 @@ This project demonstrates a production-minded MLOps workflow by combining:
 ## Project Status
 
 🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, CD image publishing, and registry-aware tagging completed.  
-Next phase: deployment refinement and production-grade monitoring enhancements.
+Next phase: production-grade deployment refinements and dashboard provisioning enhancements.
 
 ---
 
@@ -153,6 +157,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Registry-aware image tagging for reproducible releases
 * Automated semantic version tagging and GitHub release generation
 * Ready-to-import Grafana dashboard for monitoring application behavior
+* Docker Compose stack for local application, Prometheus, and Grafana setup
 
 ---
 
@@ -273,6 +278,7 @@ ai-log-anomaly-detection/
 ├── Makefile                  # Development commands (optional)
 │
 ├── Dockerfile
+├── docker-compose.yml         # Local observability stack (app + Prometheus + Grafana)
 └── README.md
 ```
 
@@ -542,6 +548,31 @@ It can be imported into Grafana to visualize:
 
 ---
 
+## Local Monitoring Stack
+
+The project includes a Docker Compose setup for running:
+
+- the FastAPI application
+- Prometheus
+- Grafana
+
+### Start the stack
+```bash
+docker compose up --build
+```
+### Access the services
+
+- Application: http://127.0.0.1:8000
+- Prometheus: http://127.0.0.1:9090
+- Grafana: http://127.0.0.1:3000
+
+### Default Grafana credentials
+
+- Username: admin
+- Password: admin
+
+---
+
 ## Running Tests
 ### Run all tests
 
@@ -585,6 +616,7 @@ ruff check .
 
 ## Upcoming Features
 - Automated Kubernetes deployment
+- Grafana datasource and dashboard provisioning
 - Alerting rules for anomaly prediction metrics
 - Production-grade deployment refinements
 

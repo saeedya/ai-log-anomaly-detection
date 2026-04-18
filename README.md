@@ -92,7 +92,7 @@
     - [Static analysis](#static-analysis)
     - [Dependency vulnerabilities](#dependency-vulnerabilities)
     - [Linting](#linting)
-  - [Upcoming Features](#upcoming-features)
+  - [Future Enhancements](#future-enhancements)
   - [License](#license)
   - [Author](#author)
   - [Screenshots](#screenshots)
@@ -755,11 +755,11 @@ ruff check .
 
 ---
 
-## Upcoming Features
-- Grafana datasource and dashboard provisioning
-- Alerting rules for anomaly prediction metrics
-- Automated Kubernetes deployment
-- Production-grade deployment refinements
+## Future Enhancements
+- Grafana datasource and dashboard auto-provisioning
+- Alerting rules for anomaly detection metrics (Prometheus Alertmanager)
+- Kubernetes deployment automation (CI/CD integration)
+- Production-grade deployment improvements (scaling, health checks, security hardening)
 
 ---
 

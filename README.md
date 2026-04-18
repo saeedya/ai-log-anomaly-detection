@@ -234,34 +234,7 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 
 ### System Diagram
 
-```mermaid
-flowchart LR
-    A[Log Input] --> B[Preprocessing]
-    B --> C[Feature Engineering]
-    C --> D[Isolation Forest Model]
-    D --> E[FastAPI API]
-    E --> F[Client]
-
-    %% Traffic simulation
-    R[Traffic Generator] --> E
-
-    %% Observability
-    E --> G["s4"]
-    E --> H["s5"]
-    H --> I[Prometheus]
-    I --> J[Grafana]
-    I --> K[Alertmanager]
-
-    %% Deployment
-    E --> L[Docker Container]
-    L --> M[Kubernetes Deployment]
-    M --> N[Helm Chart]
-
-    %% CI/CD
-    O[GitHub Actions CI] --> E
-    P[GitHub Actions CD] --> L
-    Q[Release Please] --> P
-```
+![Architecture Diagram](docs/architecture.png)
 
 ---
 

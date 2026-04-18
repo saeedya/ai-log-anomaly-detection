@@ -152,6 +152,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Prometheus scraping configuration and Grafana dashboard guidance
 * Registry-aware image tagging for reproducible releases
 * Automated semantic version tagging and GitHub release generation
+* Ready-to-import Grafana dashboard for monitoring application behavior
 
 ---
 
@@ -241,6 +242,8 @@ ai-log-anomaly-detection/
 ├── monitoring/               # Prometheus and Grafana integration files
 │   ├── prometheus.yaml
 │   └── grafana-dashboard-notes.md
+│   └── grafana/
+│       └── ai-log-anomaly-dashboard.json
 │
 ├── docs/                     # Documentation & screenshots
 │   ├── architecture.md
@@ -524,6 +527,19 @@ These notes describe recommended panels for:
 - prediction counts
 - health monitoring
 
+A sample Grafana dashboard definition is available at:
+
+```text
+monitoring/grafana/ai-log-anomaly-dashboard.json
+```
+
+It can be imported into Grafana to visualize:
+
+- total requests
+- request latency
+- prediction counts by label
+- prediction rate
+
 ---
 
 ## Running Tests
@@ -569,7 +585,6 @@ ruff check .
 
 ## Upcoming Features
 - Automated Kubernetes deployment
-- Custom Grafana dashboard JSON export
 - Alerting rules for anomaly prediction metrics
 - Production-grade deployment refinements
 

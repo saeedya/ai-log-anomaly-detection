@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.2.0...v1.3.0) (2026-04-18)
+
+
+### Features
+
+* add Docker Compose stack for local observability setup ([5655ea7](https://github.com/saeedya/ai-log-anomaly-detection/commit/5655ea785d4d7559bcc5e6315524ddb3d429383d))
+
 ## [1.2.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.1.1...v1.2.0) (2026-04-18)
 
 

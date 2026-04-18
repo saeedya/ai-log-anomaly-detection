@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     build: .
@@ -28,3 +26,13 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+
+  traffic-generator:
+    build: .
+    container_name: ai-log-anomaly-traffic-generator
+    command: ["python", "scripts/generate_traffic.py"]
+    environment:
+      PREDICT_URL: "http://app:8000/predict"
+      SLEEP_SECONDS: "2"
+    depends_on:
+      - app

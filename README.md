@@ -79,6 +79,7 @@
     - [Access the services](#access-the-services)
     - [Default Grafana credentials](#default-grafana-credentials)
   - [Traffic Generator](#traffic-generator)
+    - [Run with Docker Compose](#run-with-docker-compose)
     - [Run the traffic generator (local)](#run-the-traffic-generator-local)
       - [Configuration](#configuration-1)
       - [Example (custom configuration)](#example-custom-configuration)
@@ -122,7 +123,7 @@ This project demonstrates a production-minded MLOps workflow by combining:
 ## Project Status
 
 🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, CD image publishing, and registry-aware tagging completed.  
-Next phase: production-grade deployment refinements and dashboard provisioning enhancements.
+Next phase: Grafana provisioning and production-grade deployment refinements.
 
 ---
 
@@ -171,6 +172,7 @@ Next phase: production-grade deployment refinements and dashboard provisioning e
 * Ready-to-import Grafana dashboard for monitoring application behavior
 * Docker Compose stack for local application, Prometheus, and Grafana setup
 * Configurable traffic generator for simulating real-time prediction workloads
+* Docker Compose-based traffic generation for fully automated local demos
 
 ---
 
@@ -645,6 +647,7 @@ The project includes a Docker Compose setup for running:
 - the FastAPI application
 - Prometheus
 - Grafana
+- A traffic generator for automatic metric population
 
 ### Start the stack
 ```bash
@@ -665,14 +668,21 @@ docker compose up --build
 
 ## Traffic Generator
 
-A local traffic generator is provided to simulate real-world usage and populate application metrics.
+A traffic generator is included for demo and testing purposes.
 
-It continuously sends requests to the `/predict` endpoint using a mix of normal and anomaly-like payloads.
+It continuously sends a mix of normal and anomaly-like payloads to the `/predict` endpoint.
 
 This helps demonstrate:
 - model predictions
 - request metrics
 - Grafana dashboard activity
+
+### Run with Docker Compose
+```bash
+docker compose up --build
+```
+
+When running through Docker Compose, the traffic generator automatically targets the internal application service.
 
 ### Run the traffic generator (local)
 ```bash
@@ -746,9 +756,9 @@ ruff check .
 ---
 
 ## Upcoming Features
-- Automated Kubernetes deployment
 - Grafana datasource and dashboard provisioning
 - Alerting rules for anomaly prediction metrics
+- Automated Kubernetes deployment
 - Production-grade deployment refinements
 
 ---

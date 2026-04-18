@@ -58,9 +58,16 @@
     - [GET /](#get-)
     - [GET /health](#get-health)
     - [POST /predict](#post-predict)
-    - [GET /metrics](#get-metrics)
+    - [Request Body](#request-body)
+      - [Fields](#fields)
       - [Example Request](#example-request)
       - [Example Response](#example-response)
+      - [Fields](#fields-1)
+      - [Possible Responses](#possible-responses)
+      - [Example Validation Error](#example-validation-error)
+      - [Notes](#notes)
+      - [Example Anomaly](#example-anomaly)
+    - [GET /metrics](#get-metrics)
   - [Observability](#observability)
     - [Available metrics](#available-metrics)
   - [Monitoring Setup](#monitoring-setup)
@@ -461,11 +468,7 @@ Returns API health status
 ### POST /predict
 Runs anomaly detection on structured log features using the trained ML model.
 
-### GET /metrics
-
-Exposes Prometheus-compatible application metrics for observability and monitoring.
-
-#### Example Request
+### Request Body
 
 ```json
 {
@@ -473,6 +476,25 @@ Exposes Prometheus-compatible application metrics for observability and monitori
   "status_code": 200,
   "request_count": 15
 }
+```
+#### Fields
+
+| Field         | Type    | Description                       | Example |
+| ------------- | ------- | --------------------------------- | ------- |
+| response_time | integer | Response time in milliseconds     | 120     |
+| status_code   | integer | HTTP status code                  | 200     |
+| request_count | integer | Number of requests in time window | 15      |
+
+#### Example Request
+
+```bash
+curl -X POST http://127.0.0.1:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{
+        "response_time": 120,
+        "status_code": 200,
+        "request_count": 15
+      }'
 ```
 
 #### Example Response
@@ -483,6 +505,65 @@ Exposes Prometheus-compatible application metrics for observability and monitori
   "label": "normal"
 }
 ```
+
+#### Fields
+
+| Field      | Type    | Description                            |
+| ---------- | ------- | -------------------------------------- |
+| prediction | integer | Model output (0 = anomaly, 1 = normal) |
+| label      | string  | Human-readable label                   |
+
+#### Possible Responses
+
+| Status Code | Description                      |
+| ----------- | -------------------------------- |
+| 200         | Prediction successful            |
+| 422         | Invalid input (validation error) |
+| 500         | Internal server error            |
+
+#### Example Validation Error
+
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "response_time"],
+      "msg": "value is not a valid integer",
+      "type": "type_error.integer"
+    }
+  ]
+}
+```
+
+#### Notes
+
+- Input validation is handled using Pydantic.
+- All fields are required.
+- Invalid inputs will result in a 422 response.
+- This endpoint also emits Prometheus metrics:
+    - model_predictions_total
+
+#### Example Anomaly
+
+```json
+```json
+{
+  "response_time": 5000,
+  "status_code": 500,
+  "request_count": 200
+}
+```
+Possible response:
+```json
+{
+  "prediction": 0,
+  "label": "anomaly"
+}
+```
+
+### GET /metrics
+
+Exposes Prometheus-compatible application metrics for observability and monitoring.
 
 ---
 

@@ -3,9 +3,9 @@ namespace: ai-log-anomaly
 replicaCount: 1
 
 image:
-  repository: ai-log-anomaly-detection
+  repository: ghcr.io/saeedya/ai-log-anomaly-detection
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 service:
   type: ClusterIP

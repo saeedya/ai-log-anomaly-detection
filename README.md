@@ -5,31 +5,73 @@
 ![Status](https://img.shields.io/badge/status-in--progress-yellow)
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 ![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yaml/badge.svg)
+![CD](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/cd.yaml/badge.svg?branch=main)
 
 ---
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Project Status](#project-status)
-- [Development Workflow](#development-workflow)
-- [Security Considerations](#security-considerations)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Getting Started](#getting-started)
-- [Kubernetes Deployment](#kubernetes-deployment)
-- [Helm Deployment](#helm-deployment)
-- [API Endpoints](#api-endpoints)
-- [Observability](#observability)
-- [Running Tests](#running-tests)
-- [Security Checks](#security-checks)
-- [Upcoming Features](#upcoming-features)
-- [License](#license)
-- [Author](#author)
-- [Screenshots](#screenshots)
+- [AI-based Log Anomaly Detection System](#ai-based-log-anomaly-detection-system)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Project Status](#project-status)
+  - [Development Workflow](#development-workflow)
+  - [Security Considerations](#security-considerations)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+  - [Architecture](#architecture)
+  - [Project Structure](#project-structure)
+  - [Configuration](#configuration)
+    - [Example](#example)
+  - [Note: You can also copy `.env.example` and adapt the values for your environment.](#note-you-can-also-copy-envexample-and-adapt-the-values-for-your-environment)
+  - [Getting Started](#getting-started)
+    - [1. Clone the repository](#1-clone-the-repository)
+    - [2. Create a virtual environment](#2-create-a-virtual-environment)
+      - [Windows](#windows)
+      - [macOS / Linux](#macos--linux)
+    - [3. Install dependencies](#3-install-dependencies)
+      - [Production](#production)
+      - [Development \& testing](#development--testing)
+    - [4. Train the model](#4-train-the-model)
+    - [5. Run the API](#5-run-the-api)
+    - [6. Access API](#6-access-api)
+  - [Run with Docker](#run-with-docker)
+    - [Build the image](#build-the-image)
+    - [Run the container](#run-the-container)
+  - [Kubernetes Deployment](#kubernetes-deployment)
+    - [Apply Kubernetes manifests](#apply-kubernetes-manifests)
+    - [Verify resources](#verify-resources)
+    - [Port-forward the service](#port-forward-the-service)
+    - [Access the application](#access-the-application)
+  - [Helm Deployment](#helm-deployment)
+    - [Lint the chart](#lint-the-chart)
+    - [Render Kubernetes manifests](#render-kubernetes-manifests)
+    - [Install the chart](#install-the-chart)
+    - [Upgrade the release](#upgrade-the-release)
+    - [Uninstall the release](#uninstall-the-release)
+  - [Continuous Delivery](#continuous-delivery)
+    - [Published image](#published-image)
+  - [API Endpoints](#api-endpoints)
+    - [GET /](#get-)
+    - [GET /health](#get-health)
+    - [POST /predict](#post-predict)
+    - [GET /metrics](#get-metrics)
+      - [Example Request](#example-request)
+      - [Example Response](#example-response)
+  - [Observability](#observability)
+    - [Available metrics](#available-metrics)
+  - [Running Tests](#running-tests)
+    - [Run all tests](#run-all-tests)
+    - [Run tests with coverage](#run-tests-with-coverage)
+    - [Run lint checks](#run-lint-checks)
+  - [Security Checks](#security-checks)
+    - [Static analysis](#static-analysis)
+    - [Dependency vulnerabilities](#dependency-vulnerabilities)
+    - [Linting](#linting)
+  - [Upcoming Features](#upcoming-features)
+  - [License](#license)
+  - [Author](#author)
+  - [Screenshots](#screenshots)
 
 ## Overview
 
@@ -43,7 +85,7 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, and observability integration completed.  
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, and CD image publishing completed.  
 Next phase: deployment refinement and production-grade monitoring enhancements.
 
 ---
@@ -86,6 +128,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Non-root Docker container for improved container security
 * Prometheus-compatible metrics endpoint
 * Request and prediction observability
+* Automated CD workflow for container build and registry publishing
 
 ---
 
@@ -105,6 +148,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * GitHub Actions
 * Helm
 * Prometheus client
+* GitHub Container Registry (GHCR)
 
 ---
 
@@ -186,12 +230,9 @@ The application supports basic runtime configuration through environment variabl
 export APP_NAME="AI Log Anomaly Detection API"
 export MODEL_PATH="models/isolation_forest.pkl"
 export LOG_LEVEL="INFO"
-
 ```
 Note: You can also copy `.env.example` and adapt the values for your environment.
-
 ---
-
 ## Getting Started
 
 ### 1. Clone the repository
@@ -216,9 +257,6 @@ venv\Scripts\activate
 python3 -m venv venv
 source venv/bin/activate
 ```
-
----
-
 ### 3. Install dependencies
 #### Production
 ```bash
@@ -253,7 +291,6 @@ uvicorn app.main:app --reload
 * http://127.0.0.1:8000/docs
 
 ---
-
 ## Run with Docker
 
 ### Build the image
@@ -288,10 +325,9 @@ kubectl port-forward svc/ai-log-anomaly-detection 8000:80 -n ai-log-anomaly
 ```
 
 ### Access the application
-```bash
-http://127.0.0.1:8000
-http://127.0.0.1:8000/docs
-```
+
+- http://127.0.0.1:8000
+- http://127.0.0.1:8000/docs
 
 ---
 
@@ -322,6 +358,18 @@ helm upgrade ai-log-anomaly-detection helm/ai-log-anomaly-detection
 helm uninstall ai-log-anomaly-detection -n ai-log-anomaly
 ```
 
+---
+## Continuous Delivery
+
+The project includes a GitHub Actions CD workflow that:
+
+- Builds the Docker image automatically
+- Publishes the image to GitHub Container Registry (GHCR)
+
+### Published image
+```text
+ghcr.io/saeedya/ai-log-anomaly-detection:latest
+```
 ---
 
 ## API Endpoints
@@ -420,7 +468,7 @@ ruff check .
 ---
 
 ## Upcoming Features
-- Image registry integration
+- Automated Kubernetes deployment
 - Grafana dashboard integration
 - Alerting rules for anomaly prediction metrics
 - Production-grade deployment refinements

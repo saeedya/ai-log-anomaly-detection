@@ -78,6 +78,11 @@
     - [Start the stack](#start-the-stack)
     - [Access the services](#access-the-services)
     - [Default Grafana credentials](#default-grafana-credentials)
+  - [Traffic Generator](#traffic-generator)
+    - [Run the traffic generator (local)](#run-the-traffic-generator-local)
+      - [Configuration](#configuration-1)
+      - [Example (custom configuration)](#example-custom-configuration)
+      - [Notes](#notes-1)
   - [Running Tests](#running-tests)
     - [Run all tests](#run-all-tests)
     - [Run tests with coverage](#run-tests-with-coverage)
@@ -165,6 +170,7 @@ Next phase: production-grade deployment refinements and dashboard provisioning e
 * Automated semantic version tagging and GitHub release generation
 * Ready-to-import Grafana dashboard for monitoring application behavior
 * Docker Compose stack for local application, Prometheus, and Grafana setup
+* Configurable traffic generator for simulating real-time prediction workloads
 
 ---
 
@@ -256,6 +262,9 @@ ai-log-anomaly-detection/
 │   └── grafana-dashboard-notes.md
 │   └── grafana/
 │       └── ai-log-anomaly-dashboard.json
+│
+├── scripts/                  # Utility scripts
+│   └── generate_traffic.py   # Local traffic generator
 │
 ├── docs/                     # Documentation & screenshots
 │   ├── architecture.md
@@ -654,7 +663,48 @@ docker compose up --build
 
 ---
 
+## Traffic Generator
+
+A local traffic generator is provided to simulate real-world usage and populate application metrics.
+
+It continuously sends requests to the `/predict` endpoint using a mix of normal and anomaly-like payloads.
+
+This helps demonstrate:
+- model predictions
+- request metrics
+- Grafana dashboard activity
+
+### Run the traffic generator (local)
+```bash
+python scripts/generate_traffic.py
+```
+
+#### Configuration
+
+The traffic generator supports environment-based configuration:
+
+| Variable      | Default                                                        | Description                      |
+| ------------- | -------------------------------------------------------------- | -------------------------------- |
+| PREDICT_URL   | [http://127.0.0.1:8000/predict](http://127.0.0.1:8000/predict) | Target API endpoint              |
+| SLEEP_SECONDS | 2                                                              | Delay between requests (seconds) |
+
+#### Example (custom configuration)
+
+export PREDICT_URL=http://127.0.0.1:8000/predict
+export SLEEP_SECONDS=1
+
+python scripts/generate_traffic.py
+
+#### Notes
+
+- Generates both normal and anomaly-like inputs
+- Designed for demo and testing purposes
+- Useful for populating Prometheus metrics and Grafana dashboards
+
+---
+
 ## Running Tests
+
 ### Run all tests
 
 ```bash

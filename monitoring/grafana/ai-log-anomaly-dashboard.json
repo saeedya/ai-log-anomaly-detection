@@ -13,7 +13,8 @@
       "title": "Total Requests",
       "type": "timeseries",
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "Prometheus"
       },
       "targets": [
         {
@@ -33,7 +34,8 @@
       "title": "Request Latency",
       "type": "timeseries",
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "Prometheus"
       },
       "targets": [
         {
@@ -53,7 +55,8 @@
       "title": "Predictions by Label",
       "type": "timeseries",
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "Prometheus"
       },
       "targets": [
         {
@@ -73,7 +76,8 @@
       "title": "Prediction Rate",
       "type": "timeseries",
       "datasource": {
-        "type": "prometheus"
+        "type": "prometheus",
+        "uid": "Prometheus"
       },
       "targets": [
         {

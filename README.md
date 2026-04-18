@@ -123,7 +123,7 @@ This project demonstrates a production-minded MLOps workflow by combining:
 ## Project Status
 
 🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, CD image publishing, and registry-aware tagging completed.  
-Next phase: Grafana provisioning and production-grade deployment refinements.
+Next phase: alerting integration and production-grade deployment refinements.
 
 ---
 
@@ -173,6 +173,7 @@ Next phase: Grafana provisioning and production-grade deployment refinements.
 * Docker Compose stack for local application, Prometheus, and Grafana setup
 * Configurable traffic generator for simulating real-time prediction workloads
 * Docker Compose-based traffic generation for fully automated local demos
+* Auto-provisioned Grafana datasource and dashboard setup
 
 ---
 
@@ -261,9 +262,14 @@ ai-log-anomaly-detection/
 │
 ├── monitoring/               # Prometheus and Grafana integration files
 │   ├── prometheus.yaml
-│   └── grafana-dashboard-notes.md
+│   ├── grafana-dashboard-notes.md
 │   └── grafana/
-│       └── ai-log-anomaly-dashboard.json
+│       ├── ai-log-anomaly-dashboard.json
+│       └── provisioning/
+│           ├── dashboards/
+│           │   └── dashboard.yaml
+│           └── datasources/
+│               └── datasource.yaml
 │
 ├── scripts/                  # Utility scripts
 │   └── generate_traffic.py   # Local traffic generator
@@ -638,6 +644,19 @@ It can be imported into Grafana to visualize:
 - prediction counts by label
 - prediction rate
 
+Grafana provisioning files are included for automatic startup configuration:
+
+```text
+monitoring/grafana/provisioning/
+```
+
+This automatically configures:
+
+- the Prometheus datasource
+- the application dashboard
+
+No manual Grafana setup is required after starting the Docker Compose stack.
+
 ---
 
 ## Local Monitoring Stack
@@ -648,6 +667,8 @@ The project includes a Docker Compose setup for running:
 - Prometheus
 - Grafana
 - A traffic generator for automatic metric population
+
+The Grafana datasource and dashboard are provisioned automatically at startup.
 
 ### Start the stack
 ```bash
@@ -756,7 +777,6 @@ ruff check .
 ---
 
 ## Future Enhancements
-- Grafana datasource and dashboard auto-provisioning
 - Alerting rules for anomaly detection metrics (Prometheus Alertmanager)
 - Kubernetes deployment automation (CI/CD integration)
 - Production-grade deployment improvements (scaling, health checks, security hardening)

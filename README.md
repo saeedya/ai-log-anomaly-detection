@@ -136,6 +136,7 @@ Next phase: deployment refinement and production-grade monitoring enhancements.
 * Automated CD workflow for container build and registry publishing
 * Prometheus scraping configuration and Grafana dashboard guidance
 * Registry-aware image tagging for reproducible releases
+* Automated semantic version tagging and GitHub release generation
 
 ---
 
@@ -379,6 +380,7 @@ The project includes a GitHub Actions CD workflow that:
 - Builds the Docker image automatically
 - Publishes the image to GitHub Container Registry (GHCR)
 - Applies registry-aware image tagging for traceability and release management
+- Automatically creates versioned Git tags and GitHub releases using Release Please
 
 ### Published image
 ```text

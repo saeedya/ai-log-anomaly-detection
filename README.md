@@ -21,6 +21,7 @@
   - [Features](#features)
   - [Tech Stack](#tech-stack)
   - [Architecture](#architecture)
+    - [System Diagram](#system-diagram)
   - [Project Structure](#project-structure)
   - [Configuration](#configuration)
     - [Example](#example)
@@ -186,6 +187,8 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 - Data is preprocessed and transformed into structured features
 - A machine learning model detects anomalies
 - Results are served via a REST API
+
+### System Diagram
 
 ```mermaid
 flowchart LR

@@ -51,6 +51,7 @@
     - [Uninstall the release](#uninstall-the-release)
   - [Continuous Delivery](#continuous-delivery)
     - [Published image](#published-image)
+    - [Pull the latest image](#pull-the-latest-image)
   - [API Endpoints](#api-endpoints)
     - [GET /](#get-)
     - [GET /health](#get-health)
@@ -89,8 +90,8 @@ This project focuses on bridging the gap between machine learning models and pro
 
 ## Project Status
 
-🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, and CD image publishing completed.  
-Next phase: production-grade deployment refinements and registry-aware release management.
+🚧 In Progress – Core API, preprocessing, model integration, Dockerization, dependency security hardening, CI automation, Kubernetes manifests, Helm chart support, production hardening, observability integration, CD image publishing, and registry-aware tagging completed.  
+Next phase: deployment refinement and production-grade monitoring enhancements.
 
 ---
 
@@ -134,6 +135,7 @@ Next phase: production-grade deployment refinements and registry-aware release m
 * Request and prediction observability
 * Automated CD workflow for container build and registry publishing
 * Prometheus scraping configuration and Grafana dashboard guidance
+* Registry-aware image tagging for reproducible releases
 
 ---
 
@@ -376,11 +378,23 @@ The project includes a GitHub Actions CD workflow that:
 
 - Builds the Docker image automatically
 - Publishes the image to GitHub Container Registry (GHCR)
+- Applies registry-aware image tagging for traceability and release management
 
 ### Published image
 ```text
-ghcr.io/saeedya/ai-log-anomaly-detection:latest
+ghcr.io/saeedya/ai-log-anomaly-detection
 ```
+
+### Pull the latest image
+```bash
+docker pull ghcr.io/saeedya/ai-log-anomaly-detection:latest
+```
+
+Pull a specific release image example:
+```bash
+docker pull ghcr.io/saeedya/ai-log-anomaly-detection:v1.0.0
+```
+
 ---
 
 ## API Endpoints
@@ -512,7 +526,6 @@ ruff check .
 ---
 
 ## Upcoming Features
-- Registry-aware image versioning
 - Automated Kubernetes deployment
 - Custom Grafana dashboard JSON export
 - Alerting rules for anomaly prediction metrics

@@ -3,6 +3,8 @@ name: CD
 on:
   push:
     branches: ["main"]
+    tags:
+      - "v*.*.*"
 
 jobs:
   build-and-push:
@@ -31,8 +33,9 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=latest
-            type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,format=short,prefix=sha-
+            type=ref,event=tag
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6

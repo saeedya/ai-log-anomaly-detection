@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.1.1...v1.2.0) (2026-04-18)
+
+
+### Features
+
+* add importable Grafana dashboard for application observability ([7b2ca40](https://github.com/saeedya/ai-log-anomaly-detection/commit/7b2ca40b82419177afa7c17e93a23cf330651cee))
+
 ## [1.1.1](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.1.0...v1.1.1) (2026-04-18)
 
 

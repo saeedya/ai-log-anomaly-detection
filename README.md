@@ -490,7 +490,7 @@ The project includes a GitHub Actions CD workflow that:
 - Automatically creates versioned Git tags and GitHub releases using Release Please
 
 The CI pipeline also validates:
-- Kubernetes manifests with `kubectl --dry-run=client`
+- Kubernetes manifest validation with kubeconform
 - Helm chart syntax with `helm lint`
 - Helm template rendering with `helm template`
 

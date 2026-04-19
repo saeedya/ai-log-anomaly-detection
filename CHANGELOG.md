@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.4.0...v1.5.0) (2026-04-19)
+
+
+### Features
+
+* add production-grade Kubernetes deployment settings ([03dd675](https://github.com/saeedya/ai-log-anomaly-detection/commit/03dd67584d1c0947c3417f0be42efb9ca59374ff))
+
+
+### Bug Fixes
+
+* align Helm service template with chart values ([72b42bc](https://github.com/saeedya/ai-log-anomaly-detection/commit/72b42bc31a291ae2c6c3f19a9a841017445fbb04))
+* disable server-side validation for kubectl dry-run in CI ([b73aab9](https://github.com/saeedya/ai-log-anomaly-detection/commit/b73aab95d44c157105de1115abd33a1bf7063ad9))
+
 ## [1.4.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.3.0...v1.4.0) (2026-04-19)
 
 

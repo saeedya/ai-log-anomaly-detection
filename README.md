@@ -127,6 +127,13 @@ Username: admin
 Password: admin
 ```
 
+<p align="center">
+  <img src="docs/demo.gif" width="700"/>
+</p>
+<p align="center">
+  <em>Real-time monitoring with Prometheus and Grafana</em>
+</p>
+
 ---
 
 ## Why This Project Matters
@@ -784,3 +791,5 @@ Saeed Yasrebi
 <p align="center">
   <em>Swagger UI & Prometheus Metrics</em>
 </p>
+
+

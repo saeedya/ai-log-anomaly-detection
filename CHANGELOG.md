@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.4.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.3.0...v1.4.0) (2026-04-19)
+
+
+### Features
+
+* add configurable traffic generator for demo and observability testing ([403cb87](https://github.com/saeedya/ai-log-anomaly-detection/commit/403cb87fc5096c6d682a481ff5737eaca5cbba2f))
+* add Docker Compose traffic generator for fully automated local demos ([797e3f2](https://github.com/saeedya/ai-log-anomaly-detection/commit/797e3f25ecb3a910b53b6be0e39a25463c0c8d26))
+* add Grafana provisioning for automatic datasource and dashboard setup ([e3534d0](https://github.com/saeedya/ai-log-anomaly-detection/commit/e3534d0f22cdf538fcdf2a28a9ceb614f024c528))
+* add Prometheus alerting and Alertmanager integration with anomaly detection rules ([b3bd3b9](https://github.com/saeedya/ai-log-anomaly-detection/commit/b3bd3b9e55edf2274f11ac5fafb4da38a4f994b4))
+* finalize alertmanager integration and document slack alerting setup ([7ab860d](https://github.com/saeedya/ai-log-anomaly-detection/commit/7ab860d024ca8b24da202ac382ee3160637b93ce))
+* Improvment on architecture diagram ([aaf28f0](https://github.com/saeedya/ai-log-anomaly-detection/commit/aaf28f05bfec0b397651994e0ed8feb69008bced))
+
+
+### Bug Fixes
+
+* updating requests package ([b24fe60](https://github.com/saeedya/ai-log-anomaly-detection/commit/b24fe60e7d46db6a88647e356844952839b4f1e3))
+
 ## [1.3.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.2.0...v1.3.0) (2026-04-18)
 
 

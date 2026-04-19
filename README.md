@@ -7,11 +7,25 @@
 ![CI](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/ci.yaml/badge.svg)
 ![CD](https://github.com/saeedya/ai-log-anomaly-detection/actions/workflows/cd.yaml/badge.svg?branch=main)
 
+🚀 End-to-end MLOps project for detecting anomalies in application logs using machine learning and production-grade infrastructure.
+
+## Highlights
+
+- 🤖 ML-based anomaly detection (Isolation Forest)
+- ⚡ FastAPI prediction service
+- 📊 Prometheus + Grafana observability
+- 🚨 Real-time alerting with Alertmanager + Slack
+- 🐳 Dockerized application
+- ☸️ Kubernetes + Helm deployment
+- 📈 Autoscaling (CPU + custom metrics design)
+- 🔄 CI/CD with GitHub Actions
+
 ---
 
 ## Table of Contents
 
 - [AI-based Log Anomaly Detection System](#ai-based-log-anomaly-detection-system)
+  - [Highlights](#highlights)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Quick Demo](#quick-demo)
@@ -94,7 +108,6 @@
   - [Future Enhancements](#future-enhancements)
   - [License](#license)
   - [Author](#author)
-  - [Screenshots](#screenshots)
 
 ## Overview
 
@@ -103,6 +116,8 @@ This project is an end-to-end AI and MLOps system designed to detect anomalies i
 It simulates a real-world production scenario where logs are collected, processed, analyzed, and served through an API.
 
 This project focuses on bridging the gap between machine learning models and production systems through a practical MLOps approach.
+
+A production-inspired MLOps system that detects anomalous behavior in application logs and triggers real-time alerts using machine learning and observability tooling.
 
 ---
 
@@ -851,17 +866,3 @@ This project is for educational and demonstration purposes.
 ## Author
 
 Saeed Yasrebi
-
----
-
-## Screenshots
-
-<p align="center">
-  <img src="docs/swagger.png" width="100"/>
-  <img src="docs/metrics.png" width="100"/>
-</p>
-<p align="center">
-  <em>Swagger UI & Prometheus Metrics</em>
-</p>
-
-

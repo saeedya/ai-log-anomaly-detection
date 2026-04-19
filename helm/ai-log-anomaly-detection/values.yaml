@@ -1,21 +1,14 @@
-namespace: ai-log-anomaly
-
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: ghcr.io/saeedya/ai-log-anomaly-detection
   tag: latest
   pullPolicy: Always
 
-service:
-  type: ClusterIP
-  port: 80
-  targetPort: 8000
-
 resources:
   requests:
-    cpu: 100m
-    memory: 128Mi
+    cpu: 200m
+    memory: 256Mi
   limits:
     cpu: 500m
     memory: 512Mi
@@ -27,5 +20,18 @@ probes:
     periodSeconds: 10
   liveness:
     path: /health
-    initialDelaySeconds: 10
+    initialDelaySeconds: 15
     periodSeconds: 20
+  startup:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    failureThreshold: 12
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  runAsGroup: 10001
+  fsGroup: 10001
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false

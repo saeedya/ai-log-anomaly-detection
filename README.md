@@ -207,6 +207,10 @@ Next phase: scaling, deployment automation, and system optimization.
 * Auto-provisioned Grafana datasource and dashboard setup
 * Real-time anomaly alerting using Prometheus and Alertmanager
 * Alertmanager notification integrations (Slack)
+* Kubernetes readiness, liveness, and startup probes
+* Resource requests and limits for safer scheduling
+* Hardened container and pod security settings
+* Rolling update strategy for safer deployments
 
 ---
 
@@ -413,6 +417,12 @@ docker run --rm -p 8000:8000 ai-log-anomaly-detection:latest
 ---
 
 ## Kubernetes Deployment
+
+The Kubernetes manifests include:
+- rolling update deployment strategy
+- readiness, liveness, and startup probes
+- resource requests and limits
+- non-root security settings
 
 ### Apply Kubernetes manifests
 ```bash
@@ -803,9 +813,9 @@ ruff check .
 
 ## Future Enhancements
 
-- End-to-end Kubernetes deployment automation with GitOps or CI/CD integration
-- Enhanced alerting strategies with severity-based routing and multi-channel delivery (Slack, email)
-- Production hardening with autoscaling, resource tuning, and fault tolerance mechanisms
+- Automated Kubernetes deployment via CI/CD pipelines
+- Advanced alert routing and notification strategies
+- Autoscaling and resilience improvements
 
 ---
 

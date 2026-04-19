@@ -243,7 +243,12 @@ Logs → Preprocessing → Feature Engineering → ML Model → Prediction API �
 
 ### System Diagram
 
-![Architecture Diagram](docs/architecture.png)
+<p align="center">
+  <img src="docs/architecture.png" width="800"/>
+</p>
+<p align="center">
+  <em>End-to-end MLOps architecture with observability and alerting</em>
+</p>
 
 ---
 

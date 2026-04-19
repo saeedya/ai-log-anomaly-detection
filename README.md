@@ -213,6 +213,7 @@ Next phase: scaling, deployment automation, and system optimization.
 * Hardened container and pod security settings
 * Rolling update strategy for safer deployments
 * CI validation for Kubernetes manifests and Helm charts
+* Horizontal Pod Autoscaler (HPA) manifest for CPU-based scaling
 
 ---
 
@@ -427,6 +428,10 @@ The Kubernetes manifests include:
 - readiness, liveness, and startup probes
 - resource requests and limits
 - non-root security settings
+
+The Kubernetes configuration also includes an HPA definition for CPU-based autoscaling.
+
+Note: HPA requires `metrics-server` to be installed in the target Kubernetes cluster.
 
 ### Apply Kubernetes manifests
 ```bash
@@ -824,7 +829,7 @@ ruff check .
 
 - Automated Kubernetes deployment via CI/CD pipelines
 - Advanced alert routing and notification strategies
-- Autoscaling and resilience improvements
+- Custom metrics-based autoscaling for anomaly-driven workloads
 
 ---
 

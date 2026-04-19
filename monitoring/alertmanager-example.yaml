@@ -1,0 +1,10 @@
+route:
+  receiver: "slack-alerts"
+
+receivers:
+  - name: "slack-alerts"
+    slack_configs:
+      - api_url: "your_slack_webhook_here"
+        title: "🚨 Anomaly Alert"
+        text: "High anomaly rate detected!"
+        send_resolved: true

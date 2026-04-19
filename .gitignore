@@ -7,3 +7,4 @@ __pycache__/
 htmlcov/
 models/*.pkl
 .vscode/
+monitoring/alertmanager.yaml

@@ -203,6 +203,7 @@ Next phase: notification integrations and production-grade deployment refinement
 * Docker Compose-based local stack with automated traffic generation
 * Auto-provisioned Grafana datasource and dashboard setup
 * Real-time anomaly alerting using Prometheus and Alertmanager
+* Alertmanager notification integrations (Slack)
 
 ---
 
@@ -641,7 +642,36 @@ These rules detect abnormal system behavior such as high anomaly rates.
 
 Alerts are managed via Alertmanager:
 
-http://127.0.0.1:9093
+These rules detect abnormal system behavior such as high anomaly rates.
+
+Alerts are routed through Alertmanager and can be delivered to external notification channels such as Slack.
+
+Alertmanager UI
+
+- http://127.0.0.1:9093
+
+Alertmanager can be configured to send Slack notifications when alert conditions are met.
+
+Example configuration template:
+
+```text
+monitoring/alertmanager.example.yaml
+```
+
+To enable Slack notifications:
+
+1. Copy the example file
+2. Add your Slack webhook URL
+3. Restart the Docker Compose stack
+
+Example workflow:
+
+1. The application exposes metrics at /metrics
+2. Prometheus scrapes application metrics
+3. Alert rules evaluate anomaly behavior
+3. Alertmanager routes alerts to Slack
+
+This provides real-time operational visibility for anomaly spikes and abnormal system behavior
 
 ---
 
@@ -764,9 +794,9 @@ ruff check .
 
 ## Future Enhancements
 
-- Alertmanager notification integrations (Slack / Email)
-- Kubernetes deployment automation (CI/CD integration)
-- Production-grade deployment improvements (scaling, health checks, security hardening)
+- End-to-end Kubernetes deployment automation with GitOps or CI/CD integration
+- Enhanced alerting strategies with severity-based routing and multi-channel delivery (Slack, email)
+- Production hardening with autoscaling, resource tuning, and fault tolerance mechanisms
 
 ---
 

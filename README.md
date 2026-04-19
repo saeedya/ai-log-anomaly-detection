@@ -168,6 +168,7 @@ Next phase: scaling, deployment automation, and system optimization.
 - Separate production and development dependencies
 - Linting and security checks for code quality assurance
 - Automated CI checks for testing, linting, and security scanning
+- Continuous validation of Kubernetes manifests and Helm deployment templates
 
 ---
 
@@ -211,6 +212,7 @@ Next phase: scaling, deployment automation, and system optimization.
 * Resource requests and limits for safer scheduling
 * Hardened container and pod security settings
 * Rolling update strategy for safer deployments
+* CI validation for Kubernetes manifests and Helm charts
 
 ---
 
@@ -234,6 +236,8 @@ Next phase: scaling, deployment automation, and system optimization.
 * Prometheus
 * Grafana
 * Slack
+* kubectl
+* Helm linting and template validation
 
 ---
 
@@ -484,6 +488,11 @@ The project includes a GitHub Actions CD workflow that:
 - Publishes the image to GitHub Container Registry (GHCR)
 - Applies registry-aware image tagging for traceability and release management
 - Automatically creates versioned Git tags and GitHub releases using Release Please
+
+The CI pipeline also validates:
+- Kubernetes manifests with `kubectl --dry-run=client`
+- Helm chart syntax with `helm lint`
+- Helm template rendering with `helm template`
 
 ### Published image
 ```text

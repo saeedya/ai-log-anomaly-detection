@@ -1,9 +1,16 @@
+namespace: ai-log-anomaly
+
 replicaCount: 2
 
 image:
   repository: ghcr.io/saeedya/ai-log-anomaly-detection
   tag: latest
   pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
 
 resources:
   requests:

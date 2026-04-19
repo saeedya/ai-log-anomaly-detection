@@ -236,7 +236,7 @@ Next phase: scaling, deployment automation, and system optimization.
 * Prometheus
 * Grafana
 * Slack
-* kubectl
+* kubeconform
 * Helm linting and template validation
 
 ---

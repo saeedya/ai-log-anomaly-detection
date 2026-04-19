@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.5.0...v1.6.0) (2026-04-19)
+
+
+### Features
+
+* add example custom metrics autoscaling configuration for Kubernetes ([df9286c](https://github.com/saeedya/ai-log-anomaly-detection/commit/df9286cb30ded754be36672bba8b0134f433d984))
+* add horizontal pod autoscaling for Kubernetes deployment ([1e7776f](https://github.com/saeedya/ai-log-anomaly-detection/commit/1e7776f36f2d5e103c792d9604f1c2a2ebbe3582))
+
 ## [1.5.0](https://github.com/saeedya/ai-log-anomaly-detection/compare/v1.4.0...v1.5.0) (2026-04-19)
 
 

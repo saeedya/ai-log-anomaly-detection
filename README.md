@@ -226,6 +226,7 @@ Next phase: notification integrations and production-grade deployment refinement
 * GitHub Container Registry (GHCR)
 * Prometheus
 * Grafana
+* Slack
 
 ---
 

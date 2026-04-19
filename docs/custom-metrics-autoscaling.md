@@ -25,3 +25,17 @@ Application metrics → Prometheus → Prometheus Adapter → Kubernetes HPA →
 ## Notes
 
 This repository includes example manifests and Helm templates for custom-metric-based autoscaling, but a real cluster integration requires Prometheus Adapter configuration.
+
+# Helm install 
+
+## Prometheus Adapter (optional for custom autoscaling)
+
+To enable custom metrics autoscaling, install Prometheus Adapter:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+helm install prometheus-adapter prometheus-community/prometheus-adapter
+```
+
+You must also configure rules to expose application metrics.

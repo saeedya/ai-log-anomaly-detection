@@ -215,6 +215,7 @@ Next phase: scaling, deployment automation, and system optimization.
 * CI validation for Kubernetes manifests and Helm charts
 * Horizontal Pod Autoscaler (HPA) manifest for CPU-based scaling
 * Example custom-metrics autoscaling configuration for Kubernetes
+* Custom metrics autoscaling architecture using Prometheus Adapter (design-level)
 
 ---
 
@@ -599,6 +600,9 @@ Exposes Prometheus-compatible application metrics for observability and monitori
 
 ## Observability
 
+The system is designed to support advanced autoscaling using Prometheus Adapter,
+allowing scaling decisions based on application-level metrics such as request rate.
+
 The application exposes Prometheus-compatible metrics at:
 
 ```bash
@@ -832,7 +836,7 @@ ruff check .
 
 ## Future Enhancements
 
-- Prometheus Adapter integration for fully operational custom metrics autoscaling
+- Full Prometheus Adapter integration for production-ready custom metrics autoscaling
 - Automated Kubernetes deployment via CI/CD pipelines
 - Advanced alert routing and notification strategies
 

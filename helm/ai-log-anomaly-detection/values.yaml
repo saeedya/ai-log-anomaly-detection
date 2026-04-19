@@ -45,6 +45,11 @@ securityContext:
 
 autoscaling:
   enabled: true
+  type: cpu
+
+customAutoscaling:
+  enabled: true
   minReplicas: 2
-  maxReplicas: 5
-  targetCPUUtilizationPercentage: 70
+  maxReplicas: 6
+  metricName: app_requests_per_second
+  averageValue: "5"

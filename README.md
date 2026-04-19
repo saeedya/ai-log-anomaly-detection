@@ -214,6 +214,7 @@ Next phase: scaling, deployment automation, and system optimization.
 * Rolling update strategy for safer deployments
 * CI validation for Kubernetes manifests and Helm charts
 * Horizontal Pod Autoscaler (HPA) manifest for CPU-based scaling
+* Example custom-metrics autoscaling configuration for Kubernetes
 
 ---
 
@@ -432,6 +433,10 @@ The Kubernetes manifests include:
 The Kubernetes configuration also includes an HPA definition for CPU-based autoscaling.
 
 Note: HPA requires `metrics-server` to be installed in the target Kubernetes cluster.
+
+The project also includes an example HPA definition for custom metrics-based autoscaling.
+
+Note: This requires Prometheus Adapter and metrics-server in a real Kubernetes cluster.
 
 ### Apply Kubernetes manifests
 ```bash
@@ -827,9 +832,9 @@ ruff check .
 
 ## Future Enhancements
 
+- Prometheus Adapter integration for fully operational custom metrics autoscaling
 - Automated Kubernetes deployment via CI/CD pipelines
 - Advanced alert routing and notification strategies
-- Custom metrics-based autoscaling for anomaly-driven workloads
 
 ---
 
